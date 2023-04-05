@@ -1,0 +1,24 @@
+name: run checkmarx on [cel-lib-core]
+
+on:
+  pull_request:
+    types: [ opened, reopened, synchronize ]
+
+jobs:
+  run_ckx_scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+        # CX scan
+      - name: Checkmarx AST scan
+        uses: checkmarx/ast-github-action@main
+        with:
+          project_name: Testing_JavaVulnerableLab
+          base_uri: https://eu.iam.checkmarx.net/
+          cx_tenant: alpicloud
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
+          additional_params: --sast-incremental --sast-filter '!**/cysecurity/**', --iac-security-filter '!**/cysecurity/**', --sca-filter '!**/cysecurity/**'
