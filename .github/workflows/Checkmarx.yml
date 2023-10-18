@@ -18,6 +18,7 @@ jobs:
         uses: checkmarx/ast-github-action@main
         with:
           project_name: Testing_JavaVulnerableLab
+          branch: development
           base_uri: https://eu.iam.checkmarx.net/
           cx_tenant: alpicloud
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
