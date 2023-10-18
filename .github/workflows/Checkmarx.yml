@@ -1,9 +1,6 @@
 name: run checkmarx 
 
-on:
-  push:
-    branches:
-      - master
+
 
 jobs:
   run_ckx_scan:
